@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Expense Tracker</h1>
+        <h2>Balance: <span id="balance">₹0</span></h2>
+        <input type="text" id="description" placeholder="Enter Description">
+        <input type="number" id="amount" placeholder="Enter Amount">
+        <select id="type">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+        </select>
+        <button id="add">Add Transaction</button>
+        <button id="reset" class="reset-btn">Reset (Store to History)</button>
+        <ul id="transaction-list"></ul>
+    </div>
+
+    <div class="history-container" id="history-container">
+        <!-- History items will be added here -->
+    </div>
+
+</body>
+<script src="script.js"></script>
+</html>

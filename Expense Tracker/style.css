@@ -1,0 +1,158 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    margin: 0;
+    background: linear-gradient(135deg, #eef2f3, #dfe9f3);
+}
+
+/* Main Transaction Container */
+.container {
+    width: 400px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin: 15px auto;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+/* Input and Button Styles */
+input, select, button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+input {
+    /* max-width: 650px; */
+    width: 93%;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Reset Button */
+.reset-btn {
+    background-color: #dc3545;
+}
+
+.reset-btn:hover {
+    background-color: #c82333;
+}
+
+/* Transaction List */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 12px;
+    margin: 5px 0;
+    border-left: 5px solid;
+    border-radius: 5px;
+}
+
+/* Income & Expense Colors */
+.income { 
+    border-color: green;
+    background-color: #ccffcc;
+}
+
+.expense { 
+    border-color: red;
+    background-color: #ffcccc;
+}
+
+/* Buttons inside Transaction Items */
+.delete-btn, .edit-btn {
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 6px 12px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.income .delete-btn, .income .edit-btn {
+    background-color: #28a745;
+}
+
+.expense .delete-btn, .expense .edit-btn {
+    background-color: #dc3545;
+}
+
+/* Centered History Container */
+.history-container {
+    width: 90%;
+    max-width: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* History Section */
+.history-section {
+    flex: 1 1 calc(45% - 20px);
+    min-width: 320px;
+    padding: 15px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    margin: auto;
+}
+
+.history-section:hover {
+    transform: translateY(-5px);
+}
+
+/* History Section Heading */
+.history-section h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+    
+    .history-section {
+        flex: 1 1 100%;
+    }
+}
