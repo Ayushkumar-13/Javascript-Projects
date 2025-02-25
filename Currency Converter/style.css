@@ -87,7 +87,7 @@
     font-size: 1.15rem;
     cursor: pointer;
   }
-  @media(max-width: 320px){
+  @media(max-width: 340px){
     .container {
       width: 75%;
       padding: 1.5rem;
