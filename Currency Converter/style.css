@@ -86,3 +86,47 @@
     font-size: 1.15rem;
     cursor: pointer;
   }
+  @media(max-width: 320px){
+    .container {
+      width: 75%;
+      padding: 1.5rem;
+      height: 40%;
+    }
+  
+    .dropdown {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .select-container {
+      width: 100%;
+      margin-top: 1rem;
+    }
+  
+    .msg {
+      font-size: 1rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .container {
+      width: 75%;
+      padding: 1.5rem;
+    }
+  
+    .dropdown {
+      /* flex-direction: row; */
+      align-items: center;
+    }
+  
+    .select-container {
+      width: 100%;
+      margin-top: 1rem;
+    }
+  
+    .msg {
+      font-size: 1rem;
+    }
+    
+  }
+  
+  ✅
