@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color:bisque;
+}
+
+.container {
+  width: 80%; 
+  max-width: 600px; 
+  padding: 2.6em;
+  text-align: center;
+  background-color: #fff;
+  margin: 4em auto 1.25em auto;
+  
+}
+
+input {
+  width: 100%; /* Use 100% width to fit the container */
+  padding: 8px;
+  border: 2px solid rgb(59, 53, 53);
+  outline: none;
+}
+
+button {
+  width: 100%;
+  max-width: 6em; /* Add a max-width to prevent the button from being too wide */
+  height: 2.8em;
+  /* background-color: rgb(143, 136, 136); */
+  border: none;
+  cursor: pointer;
+  background-color:rgb(156, 104, 67);
+  color: #fff;
+}
+
+.inputs {
+  display: flex;
+  gap: 0.5em;
+  margin: 1.6em;
+}
+
+.text ul {
+  background-color: rgb(146, 124, 97);
+  color: black;
+  font-size: 19px;
+  text-align: left;
+  padding: 10px;
+  margin: 10px;
+  width: 100%; /* Use 100% width to fit the container */
+  position: relative;
+}
+
+.text ul i {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+h1 {
+  color: rgb(54, 79, 100);
+}
+
+
+@media (max-width: 768px) {
+  .container {
+      width: 90%;
+      padding: 1.5em;
+  }
+
+  button {
+      width: 100%;
+  }
+
+  .inputs {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  input {
+      width: 100%;
+      margin-bottom: 1em;
+  }
+}
