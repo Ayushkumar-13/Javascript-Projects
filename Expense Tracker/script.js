@@ -78,7 +78,7 @@ function storeToHistory() {
             <button class="edit-btn" onclick="editTransaction(${index}, this)">✏️</button>
         `;
         ul.appendChild(li);
-        
+
         // Calculate Income & Expense separately
         if (transaction.type === "income") {
             totalIncome += transaction.amount;
@@ -99,9 +99,15 @@ function storeToHistory() {
 
     historyContainer.appendChild(historyDiv);
 
+    // **Fix: Adjust global balance properly**
+    balance -= sectionBalance; // Subtract the stored section balance
+    balanceEl.textContent = `₹${balance}`; // Update balance in UI
+
+    // Clear transactions but maintain global balance
     transactions = [];
-    transactionList.innerHTML = ""; // Clear main list but balance remains
+    transactionList.innerHTML = "";
 }
+
 
 function editTransaction(index, button) {
     let newDescription = prompt("Edit description:", transactions[index].description);

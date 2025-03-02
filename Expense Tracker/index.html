@@ -12,7 +12,8 @@
         <h1>Expense Tracker</h1>
         <h2>Balance: <span id="balance">₹0</span></h2>
         <input type="text" id="description" placeholder="Enter Description">
-        <input type="number" id="amount" placeholder="Enter Amount">
+        <input type="number" id="amount" min="1" placeholder="Enter Amount" onkeydown="return event.key !== 'ArrowDown'">
+
         <select id="type">
             <option value="income">Income</option>
             <option value="expense">Expense</option>
