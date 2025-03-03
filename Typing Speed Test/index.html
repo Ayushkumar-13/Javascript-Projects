@@ -4,20 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typing Speed Test</title>
-    <link rel="stylesheet" href="style.css">
+   
 </head>
 <body>
-    <div class="container">
-        <h1>Typing Speed Test</h1>
-        <p id="textToType">Generating sentence...</p>
-        <textarea id="inputField" placeholder="Start typing here..."></textarea>
-        <div class="stats">
-            <p><strong>Time:</strong> <span id="timer">0</span>s</p>
-            <p><strong>WPM:</strong> <span id="wpm">0</span></p>
-            <p><strong>Accuracy:</strong> <span id="accuracy">100</span>%</p>
-        </div>
-        <button id="restartButton">Restart Test</button>
+
+    <!-- LOGIN PAGE -->
+    <div id="loginPage">
+        <h2>Typing Speed Test</h2>
+        <input type="text" id="username" placeholder="Enter your name">
+        <select id="timeSelect">
+            <option value="30">30 sec</option>
+            <option value="60" selected>1 min</option>
+            <option value="120">2 min</option>
+            <option value="300">5 min</option>
+        </select>
+        <button onclick="startGame()">Start</button>
     </div>
- <script src="script.js"></script>
+
+    <!-- TYPING TEST PAGE -->
+    <div id="typingTest">
+        <p id="timer">Time: <span id="timeLeft"></span> sec</p>
+        <p id="sentence"></p>
+        <div id="stats">
+            <p>WPM: <span id="wpm">0</span> | Accuracy: <span id="accuracy">100</span>%</p>
+        </div>
+        <button onclick="resetGame()">Reset</button>
+        <button id="restartButton">Restart</button>
+    </div>
+
+    <!-- FINAL RESULT PAGE -->
+    <div id="finalResult">
+        <h3>Test Completed!</h3>
+        <p id="resultText"></p>
+        <button onclick="restartTest()">Restart</button>
+    </div>
+
+    
+
 </body>
 </html>
