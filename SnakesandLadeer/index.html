@@ -3,9 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Guess the Word Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+        .game-container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        #word-display {
+            font-size: 24px;
+            letter-spacing: 5px;
+            margin: 10px 0;
+        }
+        input {
+            padding: 5px;
+            font-size: 18px;
+            text-align: center;
+            width: 40px;
+        }
+        button {
+            padding: 8px 15px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #message {
+            font-weight: bold;
+            margin-top: 10px;
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    This is snakes and ladder
+    <div class="game-container">
+        <h2>Guess the Word</h2>
+        <p id="hint"></p>
+        <p id="word-display"></p>
+        <p id="attempts">Attempts left: <span id="remaining">6</span></p>
+        <input type="text" id="letter-input" maxlength="1" />
+        <button onclick="checkLetter()">Guess</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const words = [
+            { word: "apple", hint: "A popular fruit" },
+            { word: "laptop", hint: "A portable computer" },
+            { word: "guitar", hint: "A musical instrument" },
+            { word: "python", hint: "A programming language" },
+            { word: "ocean", hint: "Large body of water" }
+        ];
+
+        let selectedWordObj = words[Math.floor(Math.random() * words.length)];
+        let word = selectedWordObj.word.toUpperCase();
+        let hint = selectedWordObj.hint;
+        let guessedWord = "_".repeat(word.length).split("");
+        let attempts = 6;
+
+        document.getElementById("word-display").textContent = guessedWord.join(" ");
+        document.getElementById("hint").textContent = "Hint: " + hint;
+
+        function checkLetter() {
+            let input = document.getElementById("letter-input").value.toUpperCase();
+            document.getElementById("letter-input").value = "";
+            document.getElementById("message").textContent = ""; 
+
+            if (!input.match(/[A-Z]/) || input.length !== 1) {
+                document.getElementById("message").textContent = "Enter a valid letter!";
+                return;
+            }
+
+            if (word.includes(input)) {
+                word.split("").forEach((letter, index) => {
+                    if (letter === input) guessedWord[index] = input;
+                });
+            } else {
+                attempts--;
+                document.getElementById("remaining").textContent = attempts;
+            }
+
+            document.getElementById("word-display").textContent = guessedWord.join(" ");
+
+            if (!guessedWord.includes("_")) {
+                document.getElementById("message").textContent = "🎉 You Won!";
+            } else if (attempts === 0) {
+                document.getElementById("message").textContent = `😞 You Lost! The word was ${word}`;
+            }
+        }
+    </script>
 </body>
 </html>

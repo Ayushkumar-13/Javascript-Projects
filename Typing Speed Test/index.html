@@ -4,42 +4,157 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typing Speed Test</title>
-   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .hidden {
+            display: none;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        input, textarea, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        button {
+            cursor: pointer;
+        }
+        #sentence span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-
-    <!-- LOGIN PAGE -->
-    <div id="loginPage">
-        <h2>Typing Speed Test</h2>
+    <div id="loginPage" class="container">
+        <h2>Login</h2>
         <input type="text" id="username" placeholder="Enter your name">
-        <select id="timeSelect">
-            <option value="30">30 sec</option>
-            <option value="60" selected>1 min</option>
-            <option value="120">2 min</option>
-            <option value="300">5 min</option>
-        </select>
-        <button onclick="startGame()">Start</button>
+        <button onclick="startTest()">Start</button>
     </div>
 
-    <!-- TYPING TEST PAGE -->
-    <div id="typingTest">
-        <p id="timer">Time: <span id="timeLeft"></span> sec</p>
+    <div id="timeSelection" class="hidden container">
+        <h2>Select Time</h2>
+        <button onclick="setTime(30)">30 sec</button>
+        <button onclick="setTime(60)">1 min</button>
+        <button onclick="setTime(120)">2 min</button>
+        <button onclick="setTime(300)">5 min</button>
+    </div>
+
+    <div id="typingTest" class="hidden container">
+        <h2 id="displayUsername"></h2>
+        <p id="timer"></p>
         <p id="sentence"></p>
-        <div id="stats">
-            <p>WPM: <span id="wpm">0</span> | Accuracy: <span id="accuracy">100</span>%</p>
-        </div>
-        <button onclick="resetGame()">Reset</button>
-        <button id="restartButton">Restart</button>
+        <textarea id="userInput" oninput="checkTyping()"></textarea>
     </div>
 
-    <!-- FINAL RESULT PAGE -->
-    <div id="finalResult">
-        <h3>Test Completed!</h3>
-        <p id="resultText"></p>
-        <button onclick="restartTest()">Restart</button>
+    <div id="resultPage" class="hidden container">
+        <h2>Results</h2>
+        <p id="resultUsername"></p>
+        <p id="wpm"></p>
+        <p id="accuracy"></p>
     </div>
 
-    
+    <script>
+        let username = "";
+        let timeLeft = 0;
+        let interval;
+        let sentence = "The quick brown fox jumps over the lazy dog.";
+        let startTime;
 
+        function startTest() {
+            username = document.getElementById("username").value;
+            if (username.trim() === "") {
+                alert("Please enter your name.");
+                return;
+            }
+            document.getElementById("loginPage").classList.add("hidden");
+            document.getElementById("timeSelection").classList.remove("hidden");
+        }
+
+        function setTime(time) {
+            timeLeft = time;
+            document.getElementById("timeSelection").classList.add("hidden");
+            document.getElementById("typingTest").classList.remove("hidden");
+            document.getElementById("displayUsername").textContent = "User: " + username;
+            document.getElementById("timer").textContent = timeLeft + "s";
+            displaySentence();
+            startCountdown();
+        }
+
+        function displaySentence() {
+            let sentenceContainer = document.getElementById("sentence");
+            sentenceContainer.innerHTML = "";
+            sentence.split("").forEach((char, index) => {
+                let span = document.createElement("span");
+                span.textContent = char;
+                span.id = "char-" + index;
+                sentenceContainer.appendChild(span);
+            });
+        }
+
+        function startCountdown() {
+            startTime = new Date().getTime();
+            interval = setInterval(() => {
+                timeLeft--;
+                document.getElementById("timer").textContent = timeLeft + "s";
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    endTest();
+                }
+            }, 1000);
+        }
+
+        function checkTyping() {
+            let userInput = document.getElementById("userInput").value;
+            let chars = document.querySelectorAll("#sentence span");
+            chars.forEach((span, index) => {
+                if (index < userInput.length) {
+                    if (userInput[index] === sentence[index]) {
+                        span.classList.add("correct");
+                        span.classList.remove("incorrect");
+                    } else {
+                        span.classList.add("incorrect");
+                        span.classList.remove("correct");
+                    }
+                } else {
+                    span.classList.remove("correct", "incorrect");
+                }
+            });
+        }
+
+        function endTest() {
+            clearInterval(interval);
+            document.getElementById("typingTest").classList.add("hidden");
+            document.getElementById("resultPage").classList.remove("hidden");
+            document.getElementById("resultUsername").textContent = "User: " + username;
+            
+            let typedText = document.getElementById("userInput").value;
+            let correctChars = 0;
+            for (let i = 0; i < typedText.length; i++) {
+                if (typedText[i] === sentence[i]) correctChars++;
+            }
+            
+            let timeTaken = (new Date().getTime() - startTime) / 60000; // in minutes
+            let wpm = Math.round((typedText.split(" ").length / timeTaken) || 0);
+            let accuracy = Math.round((correctChars / sentence.length) * 100) || 0;
+            
+            document.getElementById("wpm").textContent = "WPM: " + wpm;
+            document.getElementById("accuracy").textContent = "Accuracy: " + accuracy + "%";
+        }
+    </script>
 </body>
 </html>
